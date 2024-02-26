@@ -30,8 +30,6 @@ def read_ratings_data(f):
         else:
             usersRated[title] = [userid]
             ratingsData[title] = [rating]
-    print(ratingsData)
-    print()
     return ratingsData
     pass
     
@@ -55,8 +53,6 @@ def read_movie_genre(f):
         else:
             movieIDs[title] = movieID 
             genreData[title] = genre
-    print(genreData)
-    print()
     return genreData
 
     pass
@@ -74,7 +70,8 @@ def create_genre_dict(d):
             genreDict[value].append(key)
         else: 
             genreDict[value] = [key]
-    print(genreDict)
+
+    return genreDict
     pass
     
 # 2.2
@@ -86,7 +83,6 @@ def calculate_average_rating(d):
     for key, values in d.items():
         averageRatings[key] = (sum(values))/len(values)
             
-    print(averageRatings)
     return averageRatings
     pass
     
@@ -101,7 +97,6 @@ def get_popular_movies(d, n=10):
     # WRITE YOUR CODE BELOW
     pass
     sortedMovies = dict(Counter(d).most_common(n))
-    print(sortedMovies)
     return sortedMovies
 # 3.2
 def filter_movies(d, thres_rating=3):
@@ -113,7 +108,6 @@ def filter_movies(d, thres_rating=3):
     for key, value in d.values():
         if(value >= thres_rating):
             thresholdMovies[key] = value
-    print(thresholdMovies)
     return thresholdMovies
     pass
     
@@ -125,6 +119,15 @@ def get_popular_in_genre(genre, genre_to_movies, movie_to_average_rating, n=5):
     # parameter n: integer (for top n), default value 5
     # return: dictionary that maps movie to average rating
     # WRITE YOUR CODE BELOW
+    popularInGenre = {}
+    if(genre in genre_to_movies.keys()):
+        movies = genre_to_movies[genre]
+    for movie in movies:
+        if(movie in movie_to_average_rating.keys()):
+            popularInGenre[movie] = movie_to_average_rating[movie]
+        else:
+            popularInGenre[movie] = 0
+    return get_popular_movies(popularInGenre, n)
     pass
     
 # 3.4
@@ -143,6 +146,7 @@ def genre_popularity(genre_to_movies, movie_to_average_rating, n=5):
     # parameter n: integer (for top n), default value 5
     # return: dictionary that maps genre to average rating
     # WRITE YOUR CODE BELOW
+    
     pass
 
 # ------ TASK 4: USER FOCUSED  --------
@@ -180,7 +184,8 @@ def main():
     
     
     #create_genre_dict(read_movie_genre("genreMovieSample.txt"))
-    get_popular_movies(calculate_average_rating(read_ratings_data("movieRatingSample.txt")), 3)
+    #get_popular_movies(calculate_average_rating(read_ratings_data("movieRatingSample.txt")), 3)
+    print(get_popular_in_genre('Adventure', create_genre_dict(read_movie_genre('genreMovieSample.txt')),calculate_average_rating(read_ratings_data("movieRatingSample.txt"))))
     pass
     
 # DO NOT write ANY CODE (including variable names) outside of any of the above functions
