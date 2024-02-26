@@ -30,9 +30,8 @@ def read_ratings_data(f):
         else:
             usersRated[title] = [userid]
             ratingsData[title] = [rating]
-    print(usersRated)
-    print("\n")
     print(ratingsData)
+    print()
     return ratingsData
     pass
     
@@ -83,6 +82,12 @@ def calculate_average_rating(d):
     # parameter d: dictionary that maps movie to ratings
     # return: dictionary that maps movie to average rating
     # WRITE YOUR CODE BELOW
+    averageRatings = {}
+    for key, values in d.items():
+        averageRatings[key] = (sum(values))/len(values)
+            
+    print(averageRatings)
+    return averageRatings
     pass
     
 # ------ TASK 3: RECOMMENDATION --------
@@ -166,8 +171,8 @@ def main():
     # this function will be ignored by us when grading
     
     
-    #read_ratings_data("movieRatingSample2.txt")
-    create_genre_dict(read_movie_genre("genreMovieSample.txt"))
+    #create_genre_dict(read_movie_genre("genreMovieSample.txt"))
+    calculate_average_rating(read_ratings_data("movieRatingSample.txt"))
     pass
     
 # DO NOT write ANY CODE (including variable names) outside of any of the above functions
