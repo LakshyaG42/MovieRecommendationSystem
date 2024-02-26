@@ -109,6 +109,12 @@ def filter_movies(d, thres_rating=3):
     # parameter thres_rating: threshold rating, default value 3
     # return: dictionary that maps movie to average rating
     # WRITE YOUR CODE BELOW
+    thresholdMovies = {}
+    for key, value in d.values():
+        if(value >= thres_rating):
+            thresholdMovies[key] = value
+    print(thresholdMovies)
+    return thresholdMovies
     pass
     
 # 3.3
