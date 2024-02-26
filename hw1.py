@@ -100,7 +100,9 @@ def get_popular_movies(d, n=10):
     #         in ranked order from highest to lowest average rating
     # WRITE YOUR CODE BELOW
     pass
-    
+    sortedMovies = dict(Counter(d).most_common(n))
+    print(sortedMovies)
+    return sortedMovies
 # 3.2
 def filter_movies(d, thres_rating=3):
     # parameter d: dictionary that maps movie to average rating
@@ -172,7 +174,7 @@ def main():
     
     
     #create_genre_dict(read_movie_genre("genreMovieSample.txt"))
-    calculate_average_rating(read_ratings_data("movieRatingSample.txt"))
+    get_popular_movies(calculate_average_rating(read_ratings_data("movieRatingSample.txt")), 3)
     pass
     
 # DO NOT write ANY CODE (including variable names) outside of any of the above functions
